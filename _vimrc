@@ -32,7 +32,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/indentpython.vim'
 Bundle 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'dense-analysis/ale'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -79,7 +79,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <leader>ec :vsplit <c-r>=cheatsheet_path<cr><cr>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
-vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>lel
+vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>lel
 nnoremap <F5> :NERDTreeToggle<CR>
 nnoremap <silent> <leader>h <plug>(YCMHover)
 inoremap jk <Esc>
