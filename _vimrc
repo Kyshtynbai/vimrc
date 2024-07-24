@@ -1,11 +1,12 @@
 " General settings {{{
+set directory^=$HOME/.vim/tmp//
 set encoding=utf-8
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 set fileencoding=utf-8
 set nu
 set backspace=indent,eol,start
 set belloff=all
-set directory=~\.vimswap
+set directory=/tmp/vimswap
 "" }}}
 " Making folding works in .vimrc {{{
 augroup filetype_vim
@@ -26,28 +27,28 @@ endif
 filetype off " required
 filetype plugin indent on    " required
 set shellslash
-set rtp+=~/vimfiles/bundle/Vundle.vim
-call vundle#begin('~/vimfiles/bundle')
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Bundle 'Valloric/YouCompleteMe'
-Plugin 'dense-analysis/ale'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'nvie/vim-flake8'
-Plugin 'sainnhe/sonokai'
+Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-startify'
+Plugin 'sainnhe/sonokai'
 call vundle#end()            " required
 " }}}
 colorscheme sonokai
 " Autocompletion and code guidelines {{{
-set maxmempattern=2000000
+packadd YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
-let g:ycm_python_binary_path='sdfsd./venv/bin/python'
 let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path', 'g:ycm_python_sys_path']
 let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 let g:SimpylFold_docstring_preview = 1
