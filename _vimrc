@@ -47,7 +47,7 @@ set maxmempattern=2000000
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
-let g:ycm_python_binary_path='sdfsd./venv/bin/python'
+let g:ycm_python_binary_path='./venv/bin/python'
 let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path', 'g:ycm_python_sys_path']
 let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 let g:SimpylFold_docstring_preview = 1
@@ -77,6 +77,7 @@ inoremap <c-ц> <c-w>
 inoremap <c-u> <esc>wbveUea
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
+nnoremap <leader>ss :Startify<cr>
 nnoremap <leader>ec :vsplit <c-r>=cheatsheet_path<cr><cr>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>lel
@@ -85,7 +86,19 @@ nnoremap <silent> <leader>h <plug>(YCMHover)
 inoremap jk <Esc>
 iabbrev @@ imartynow@gmail.com
 " }}}
-
+" DOKUWIKI {{{
+augroup doku 
+	autocmd!
+	autocmd FileType text inoremap 1h ======   ======<esc>bhhi
+	autocmd FileType text inoremap 2h =====   =====<esc>bhhi
+	autocmd FileType text inoremap 3h ====   ====<esc>bhhi
+augroup END
+" }}}
 "Autocommands
 "autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 "autocmd FileType python     :iabbrev <buffer> iff if:<left>
+func! Siski()
+	call popup_notification("Get the hell out of Dodge!", 
+	\ #{ line: 5, col: 10, highlight: 'WildMenu', close: 'button' } )
+endfunc
+nnoremap <leader>! :call Siski()<cr>
