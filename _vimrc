@@ -19,7 +19,7 @@ if has('gui_running')
 	set guioptions-=T  "remove toolbar
 	set guioptions-=r  "remove right-hand scroll bar
 	set guioptions-=L  "remove left-hand scroll bar
-	set guifont=DejaVu\ Sans\ Mono:h12
+	set guifont=DejaVu\ Sans\ Mono\ 14
 	set linespace=3
 endif
 " }}}
@@ -86,7 +86,10 @@ nnoremap <silent> <leader>h <plug>(YCMHover)
 inoremap jk <Esc>
 iabbrev @@ imartynow@gmail.com
 " }}}
-
+highlight Error ctermfg=red
+augroup md_color
+	au BufNewFile,BufRead *.md match Error /ERROR/
+augroup END
 "Autocommands
 "autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 "autocmd FileType python     :iabbrev <buffer> iff if:<left>
