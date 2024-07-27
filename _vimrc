@@ -85,10 +85,16 @@ nnoremap <silent> <leader>h <plug>(YCMHover)
 inoremap jk <Esc>
 iabbrev @@ imartynow@gmail.com
 " }}}
-highlight Error ctermfg=red
 augroup md_color
 	au BufNewFile,BufRead *.md match Error /ERROR/
 augroup END
-"Autocommands
-"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-"autocmd FileType python     :iabbrev <buffer> iff if:<left>
+
+" Переопределение секции airline {{{
+" https://stackoverflow.com/questions/73636092/how-to-add-custom-text-to-vi-airline
+" https://vi.stackexchange.com/questions/15698/add-custom-section-to-airline
+function! StatusLineHelper()
+	return 'F1 for help'
+endfunc
+call airline#parts#define_function('foo', "StatusLineHelper")
+let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
+" }}}
