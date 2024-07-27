@@ -6,7 +6,6 @@ set fileencoding=utf-8
 set nu
 set backspace=indent,eol,start
 set belloff=all
-set directory=/tmp/vimswap
 "" }}}
 " Making folding works in .vimrc {{{
 augroup filetype_vim
