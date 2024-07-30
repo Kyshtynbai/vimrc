@@ -1,3 +1,4 @@
+autocmd FileType help wincmd L
 " General settings {{{
 set encoding=utf-8
 "set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -72,6 +73,7 @@ let cheatsheet_path = '$HOME/.cheatsheet'
 
 " Map hotkeys and abbreviations {{{
 let maplocalleader=","
+nnoremap <leader>x :call popup_clear(1)<cr>
 nnoremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <c-ц> <c-w>
 inoremap <c-u> <esc>wbveUea
@@ -101,11 +103,41 @@ augroup END
 "Autocommands
 "autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 "autocmd FileType python     :iabbrev <buffer> iff if:<left>
-func! Siski()
+" Different testing popups {{{
+func! Sis()
+	call popup_create(["Siski","Zhopy","SRAKI"], 
+	\ #{ pos: 'botleft',
+	\ highlight: 'PmenuKind', 
+	\ moved: 'any',
+	\ close: 'button',
+	\ padding: [1,1,1,1],
+	\ border: []
+	\ } )
+endfunc
+func! NotificationCstm()
 	call popup_notification("Подсказки по клавишам:", 
 	\ #{ line: 10, col: 60, highlight: 'WildMenu', close: 'button' } )
 endfunc
-nnoremap <F1> :call Siski()<cr>
+" }}}
+nnoremap <F1> :call CheatSheet()<cr>
+func! MenuCB(id, result)
+	echo "You chose item #".a:result
+endfunc
+func! CheatSheet()
+	call popup_menu([
+			\'The quick fox',
+			\ 'jumped over',
+			\ 'the lazy dogs'
+			\],
+			\ #{
+			\ close: 'click',
+			\ title: 'Well? Pick one',
+			\ callback: 'MenuCB',
+			\ highlight: 'Question',
+			\ border: [],
+			\ padding: [1,1,0,1]
+			\	})
+endfunc
 " Переопределение секции airline {{{
 " https://stackoverflow.com/questions/73636092/how-to-add-custom-text-to-vi-airline
 " https://vi.stackexchange.com/questions/15698/add-custom-section-to-airline
