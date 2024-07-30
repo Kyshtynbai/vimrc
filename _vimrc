@@ -89,16 +89,25 @@ iabbrev @@ imartynow@gmail.com
 " DOKUWIKI {{{
 augroup doku 
 	autocmd!
-	autocmd FileType text inoremap 1h ======   ======<esc>bhhi
-	autocmd FileType text inoremap 2h =====   =====<esc>bhhi
-	autocmd FileType text inoremap 3h ====   ====<esc>bhhi
+	autocmd FileType text inoremap h1 ======   ======<esc>bhhi
+	autocmd FileType text inoremap h2 =====   =====<esc>bhhi
+	autocmd FileType text inoremap h3 ====   ====<esc>bhhi
 augroup END
 " }}}
 "Autocommands
 "autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 "autocmd FileType python     :iabbrev <buffer> iff if:<left>
 func! Siski()
-	call popup_notification("Get the hell out of Dodge!", 
-	\ #{ line: 5, col: 10, highlight: 'WildMenu', close: 'button' } )
+	call popup_notification("Подсказки по клавишам:", 
+	\ #{ line: 10, col: 60, highlight: 'WildMenu', close: 'button' } )
 endfunc
-nnoremap <leader>! :call Siski()<cr>
+nnoremap <F1> :call Siski()<cr>
+" Переопределение секции airline {{{
+" https://stackoverflow.com/questions/73636092/how-to-add-custom-text-to-vi-airline
+" https://vi.stackexchange.com/questions/15698/add-custom-section-to-airline
+function! StatusLineHelper()
+	return 'F1 for keys'
+endfunc
+call airline#parts#define_function('foo', "StatusLineHelper")
+let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
+" }}}
