@@ -1,6 +1,6 @@
 " General settings {{{
 set encoding=utf-8
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+"set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 set fileencoding=utf-8
 set nu
 set backspace=indent,eol,start
@@ -89,9 +89,13 @@ iabbrev @@ imartynow@gmail.com
 " DOKUWIKI {{{
 augroup doku 
 	autocmd!
-	autocmd FileType text inoremap h1 ======   ======<esc>bhhi
-	autocmd FileType text inoremap h2 =====   =====<esc>bhhi
-	autocmd FileType text inoremap h3 ====   ====<esc>bhhi
+	autocmd FileType text nnoremap <buffer> <localleader>h1 i======   ======<esc>bhhi
+	autocmd FileType text nnoremap <buffer> <localleader>h2 o=====   =====<esc>bhhi
+	autocmd FileType text nnoremap <buffer> <localleader>h3 o====   ====<esc>bhhi
+	autocmd FileType text nnoremap <buffer> <localleader>b viw<esc>a**<esc>hhbi**<esc>lE
+	autocmd FileType text inoremap <buffer> ** ****<esc>hi
+	autocmd FileType text inoremap <buffer> // ////<esc>hi
+	autocmd FileType text inoremap <buffer> '' ''''<esc>hi
 augroup END
 " }}}
 "Autocommands
