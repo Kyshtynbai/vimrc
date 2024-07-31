@@ -98,3 +98,55 @@ endfunc
 call airline#parts#define_function('foo', "StatusLineHelper")
 let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
 " }}}
+" DOKUWIKI {{{
+augroup doku 
+	autocmd!
+	autocmd FileType text nnoremap <buffer> <localleader>h1 i======   ======<esc>bhhi
+	autocmd FileType text nnoremap <buffer> <localleader>h2 o=====   =====<esc>bhhi
+	autocmd FileType text nnoremap <buffer> <localleader>h3 o====   ====<esc>bhhi
+	autocmd FileType text nnoremap <buffer> <localleader>b viw<esc>a**<esc>hhbi**<esc>lE
+	autocmd FileType text inoremap <buffer> ** ****<esc>hi
+	autocmd FileType text inoremap <buffer> // ////<esc>hi
+	autocmd FileType text inoremap <buffer> '' ''''<esc>hi
+augroup END
+" }}}
+"Autocommands
+"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+"autocmd FileType python     :iabbrev <buffer> iff if:<left>
+" Different testing popups {{{
+func! Sis()
+	call popup_create(["Siski","Zhopy","SRAKI"], 
+	\ #{ pos: 'botleft',
+	\ highlight: 'PmenuKind', 
+	\ moved: 'any',
+	\ close: 'button',
+	\ padding: [1,1,1,1],
+	\ border: []
+	\ } )
+endfunc
+func! NotificationCstm()
+	call popup_notification("Подсказки по клавишам:", 
+	\ #{ line: 10, col: 60, highlight: 'WildMenu', close: 'button' } )
+endfunc
+" }}}
+" POPUP {{{
+nnoremap <F1> :call CheatSheet()<cr>
+func! MenuCB(id, result)
+	echo "You chose item #".a:result
+endfunc
+func! CheatSheet()
+	call popup_menu([
+			\'The quick fox',
+			\ 'jumped over',
+			\ 'the lazy dogs'
+			\],
+			\ #{
+			\ close: 'click',
+			\ title: 'Well? Pick one',
+			\ callback: 'MenuCB',
+			\ highlight: 'Question',
+			\ border: [],
+			\ padding: [1,1,0,1]
+			\	})
+endfunc
+" }}}
