@@ -1,3 +1,4 @@
+set grepprg=internal
 autocmd FileType help wincmd L
 " General settings {{{
 set encoding=utf-8
@@ -32,7 +33,6 @@ call vundle#begin('~/vimfiles/bundle')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/indentpython.vim'
-Bundle 'Valloric/YouCompleteMe'
 Plugin 'dense-analysis/ale'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
@@ -44,13 +44,6 @@ call vundle#end()            " required
 " }}}
 colorscheme sonokai
 " Autocompletion and code guidelines {{{
-set maxmempattern=2000000
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = []
-let g:ycm_python_binary_path='./venv/bin/python'
-let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path', 'g:ycm_python_sys_path']
-let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 let g:SimpylFold_docstring_preview = 1
 augroup code_guidelines
 	autocmd!
@@ -80,7 +73,7 @@ inoremap <c-u> <esc>wbveUea
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <leader>ss :Startify<cr>
-nnoremap <leader>ec :vsplit <c-r>=cheatsheet_path<cr><cr>
+nnoremap <leader>ec :execute "vsplit" cheatsheet_path<cr>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>lel
 nnoremap <F5> :NERDTreeToggle<CR>
@@ -119,14 +112,21 @@ func! NotificationCstm()
 	\ #{ line: 10, col: 60, highlight: 'WildMenu', close: 'button' } )
 endfunc
 " }}}
+let g:testpath = '$HOME/testpath.md'
+let g:cheatsheet = '$HOME/cheatsheet.md'
 nnoremap <F1> :call CheatSheet()<cr>
 func! MenuCB(id, result)
 	echo "You chose item #".a:result
+	if a:result == 1
+		:execute "vsplit" g:testpath 
+	elseif a:result == 2
+		:execute "vsplit" g:cheatsheet
+	endif
 endfunc
 func! CheatSheet()
 	call popup_menu([
-			\'The quick fox',
-			\ 'jumped over',
+			\'Заголовок по менбше',
+			\ 'Cheatsheet',
 			\ 'the lazy dogs'
 			\],
 			\ #{
