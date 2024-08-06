@@ -1,3 +1,4 @@
+set grepprg=internal
 autocmd FileType help wincmd L
 " General settings {{{
 set encoding=utf-8
