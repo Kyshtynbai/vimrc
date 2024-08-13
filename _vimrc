@@ -1,6 +1,6 @@
+" General settings {{{
 set grepprg=internal
 autocmd FileType help wincmd L
-" General settings {{{
 set encoding=utf-8
 "set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 set fileencoding=utf-8
@@ -42,8 +42,8 @@ Plugin 'nvie/vim-flake8'
 Plugin 'sainnhe/sonokai'
 Plugin 'mhinz/vim-startify'
 call vundle#end()            " required
-" }}}
 colorscheme sonokai
+" }}}
 " Autocompletion and code guidelines {{{
 set maxmempattern=2000000
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -68,13 +68,14 @@ augroup nerdtree
 augroup END
 let NERDTreeHijackNetrw = 0
 " }}}
-
-" Variables and file paths
+" {{{ Variables and file paths
 let cheatsheet_path = '$HOME/.cheatsheet'
-
+let g:stads_path = 'C:\Users\user\Documents\stands.md'
+" }}}
 " Map hotkeys and abbreviations {{{
 let maplocalleader=","
 nnoremap <leader>x :call popup_clear(1)<cr>
+nnoremap <F1> :call CheatSheet()<cr>
 nnoremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <c-ц> <c-w>
 inoremap <c-u> <esc>wbveUea
@@ -101,9 +102,11 @@ augroup doku
 	autocmd FileType text inoremap <buffer> '' ''''<esc>hi
 augroup END
 " }}}
+" {{{ AUTOCOMMANDS
 "Autocommands
 "autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 "autocmd FileType python     :iabbrev <buffer> iff if:<left>
+" }}}
 " Different testing popups {{{
 func! Sis()
 	call popup_create(["Siski","Zhopy","SRAKI"], 
@@ -120,15 +123,16 @@ func! NotificationCstm()
 	\ #{ line: 10, col: 60, highlight: 'WildMenu', close: 'button' } )
 endfunc
 " }}}
-nnoremap <F1> :call CheatSheet()<cr>
 func! MenuCB(id, result)
-	echo "You chose item #".a:result
+	if a:result == 1
+		:execute ":vs ". g:stads_path
+	endif
 endfunc
 func! CheatSheet()
 	call popup_menu([
-			\'The quick fox',
-			\ 'jumped over',
-			\ 'the lazy dogs'
+			\'Стенды виртуальных машин',
+			\ 'Тынге',
+			\ 'Пароли'
 			\],
 			\ #{
 			\ close: 'click',
@@ -136,7 +140,7 @@ func! CheatSheet()
 			\ callback: 'MenuCB',
 			\ highlight: 'Question',
 			\ border: [],
-			\ padding: [1,1,0,1]
+			\ padding: [1,1,1,1]
 			\	})
 endfunc
 " Переопределение секции airline {{{
