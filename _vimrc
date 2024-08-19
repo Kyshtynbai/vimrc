@@ -71,6 +71,7 @@ let NERDTreeHijackNetrw = 0
 " {{{ Variables and file paths
 let cheatsheet_path = '$HOME/.cheatsheet'
 let g:stads_path = 'C:\Users\user\Documents\stands.md'
+let g:sshkey = 'C:\Users\user\.vagrant.d\insecure_private_keys\vagrant.key.rsa'
 " }}}
 " Map hotkeys and abbreviations {{{
 let maplocalleader=","
@@ -82,6 +83,7 @@ inoremap <c-u> <esc>wbveUea
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <leader>ss :Startify<cr>
+nnoremap <leader>cp :call Scp()<cr>
 nnoremap <leader>ec :vsplit <c-r>=cheatsheet_path<cr><cr>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>lel
@@ -123,6 +125,7 @@ func! NotificationCstm()
 	\ #{ line: 10, col: 60, highlight: 'WildMenu', close: 'button' } )
 endfunc
 " }}}
+" {{{ F1 MENU
 func! MenuCB(id, result)
 	if a:result == 1
 		:execute ":vs ". g:stads_path
@@ -143,6 +146,7 @@ func! CheatSheet()
 			\ padding: [1,1,1,1]
 			\	})
 endfunc
+" }}}
 " Переопределение секции airline {{{
 " https://stackoverflow.com/questions/73636092/how-to-add-custom-text-to-vi-airline
 " https://vi.stackexchange.com/questions/15698/add-custom-section-to-airline
@@ -152,3 +156,6 @@ endfunc
 call airline#parts#define_function('foo', "StatusLineHelper")
 let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
 " }}}
+func! Scp()
+	:execute "silent !scp -i ". g:sshkey . " ipa.pl vagrant@192.168.56.101:/home/vagrant/"
+endfunc
