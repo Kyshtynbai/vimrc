@@ -1,5 +1,6 @@
 " General settings {{{
 set grepprg=internal
+set tabstop=4
 autocmd FileType help wincmd L
 set encoding=utf-8
 "set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -159,3 +160,4 @@ let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
 func! Scp()
 	:execute "silent !scp -i ". g:sshkey . " ipa.pl vagrant@192.168.56.101:/home/vagrant/"
 endfunc
+" регистр % содержит имя текущего файла. Сделать вставку "%p
