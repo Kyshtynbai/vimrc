@@ -1,4 +1,5 @@
 " General settings {{{
+match none
 set directory^=$HOME/.vim/tmp//
 set encoding=utf-8
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -70,12 +71,18 @@ let NERDTreeHijackNetrw = 0
 " Variables and file paths
 let cheatsheet_path = '$HOME/.cheatsheet'
 let g:infra = '$HOME/Documents/INFRA/PD15.md'
+function! GetWhiteSpaces()
+	:match Search /\v\s+|\t+|\n/
+endfunc
+
 
 " Map hotkeys and abbreviations {{{
 let maplocalleader=","
 nnoremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <c-ц> <c-w>
 nnoremap <leader>hl :set hlsearch!<cr>
+nnoremap <leader>ww :call GetWhiteSpaces()<cr>
+nnoremap <leader>wn :match none<cr>
 inoremap <c-u> <esc>wbveUea
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
