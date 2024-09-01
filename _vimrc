@@ -72,7 +72,7 @@ let NERDTreeHijackNetrw = 0
 let cheatsheet_path = '$HOME/.cheatsheet'
 let g:infra = '$HOME/Documents/INFRA/PD15.md'
 function! GetWhiteSpaces()
-	:match Search /\v\s+|\t+|\n/
+	:match Search /\v\s+|\t+|^\n/
 endfunc
 
 
