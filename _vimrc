@@ -69,11 +69,13 @@ let NERDTreeHijackNetrw = 0
 
 " Variables and file paths
 let cheatsheet_path = '$HOME/.cheatsheet'
+let g:infra = '$HOME/Documents/INFRA/PD15.md'
 
 " Map hotkeys and abbreviations {{{
 let maplocalleader=","
 nnoremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <c-ц> <c-w>
+nnoremap <leader>hl :set hlsearch!<cr>
 inoremap <c-u> <esc>wbveUea
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
@@ -93,7 +95,7 @@ augroup END
 " https://stackoverflow.com/questions/73636092/how-to-add-custom-text-to-vi-airline
 " https://vi.stackexchange.com/questions/15698/add-custom-section-to-airline
 function! StatusLineHelper()
-	return 'F1 for help'
+	return 'F1 - PD15 hosts'
 endfunc
 call airline#parts#define_function('foo', "StatusLineHelper")
 let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
@@ -132,21 +134,23 @@ endfunc
 " POPUP {{{
 nnoremap <F1> :call CheatSheet()<cr>
 func! MenuCB(id, result)
-	echo "You chose item #".a:result
+	if a:result == 1
+		:execute ":vs". g:infra
+	endif
 endfunc
 func! CheatSheet()
 	call popup_menu([
-			\'The quick fox',
-			\ 'jumped over',
-			\ 'the lazy dogs'
+			\'PD15v2',
+			\ 'PD15 common',
+			\ 'Usefull links'
 			\],
 			\ #{
 			\ close: 'click',
-			\ title: 'Well? Pick one',
+			\ title: 'Hosts and passwords',
 			\ callback: 'MenuCB',
 			\ highlight: 'Question',
 			\ border: [],
-			\ padding: [1,1,0,1]
+			\ padding: [1,2,1,2]
 			\	})
 endfunc
 " }}}
