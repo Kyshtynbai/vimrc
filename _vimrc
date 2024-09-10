@@ -76,6 +76,7 @@ let g:sshkey = 'C:\Users\user\.vagrant.d\insecure_private_keys\vagrant.key.rsa'
 " }}}
 " Map hotkeys and abbreviations {{{
 let maplocalleader=","
+nnoremap <leader><space> viW"+y
 nnoremap <leader>x :call popup_clear(1)<cr>
 nnoremap <F1> :call CheatSheet()<cr>
 nnoremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
