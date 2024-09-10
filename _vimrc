@@ -147,4 +147,12 @@ func! Scp()
 	:execute "silent !scp -i ". g:sshkey . " ipa.pl vagrant@192.168.56.101:/home/vagrant/"
 endfunc
 "}}}
+" {{{ pwgen
+function! GenPass()
+        let pass=system('pwgen 16 1')
+        exe "normal! $a" . "," .  pass . "\<Esc>dd"
+endfunc
+
+nnoremap <leader>p :call GenPass()<cr>
+"}}}
 " регистр % содержит имя текущего файла. Сделать вставку "%p
