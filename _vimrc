@@ -111,22 +111,6 @@ augroup END
 "autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 "autocmd FileType python     :iabbrev <buffer> iff if:<left>
 " }}}
-" Different testing popups {{{
-func! Sis()
-	call popup_create(["Siski","Zhopy","SRAKI"], 
-	\ #{ pos: 'botleft',
-	\ highlight: 'PmenuKind', 
-	\ moved: 'any',
-	\ close: 'button',
-	\ padding: [1,1,1,1],
-	\ border: []
-	\ } )
-endfunc
-func! NotificationCstm()
-	call popup_notification("Подсказки по клавишам:", 
-	\ #{ line: 10, col: 60, highlight: 'WildMenu', close: 'button' } )
-endfunc
-" }}}
 " {{{ F1 MENU
 func! MenuCB(id, result)
 	if a:result == 1
@@ -158,7 +142,9 @@ endfunc
 call airline#parts#define_function('foo', "StatusLineHelper")
 let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
 " }}}
+" {{{ SCP to specific remote host
 func! Scp()
 	:execute "silent !scp -i ". g:sshkey . " ipa.pl vagrant@192.168.56.101:/home/vagrant/"
 endfunc
+"}}}
 " регистр % содержит имя текущего файла. Сделать вставку "%p
