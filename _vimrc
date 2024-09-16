@@ -72,11 +72,13 @@ let NERDTreeHijackNetrw = 0
 " {{{ Variables and file paths
 let cheatsheet_path = '$HOME/.cheatsheet'
 let g:stads_path = 'C:\Users\user\Documents\stands.md'
-let g:sshkey = 'C:\Users\user\.vagrant.d\insecure_private_keys\vagrant.key.rsa'
+" let g:sshkey = 'C:\Users\user\.vagrant.d\insecure_private_keys\vagrant.key.rsa'
+let g:sshkey = 'C:\Users\user\.ssh\ipa_id_ed25519'
 " }}}
 " Map hotkeys and abbreviations {{{
 let maplocalleader=","
-nnoremap <leader><space> viW"+y
+nnoremap <leader>e :%s/@.*//<cr>
+nnoremap <leader>y viW"+y
 nnoremap <leader>x :call popup_clear(1)<cr>
 nnoremap <F1> :call CheatSheet()<cr>
 nnoremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -144,15 +146,17 @@ let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
 " }}}
 " {{{ SCP to specific remote host
 func! Scp()
-	:execute "silent !scp -i ". g:sshkey . " ipa.pl vagrant@192.168.56.101:/home/vagrant/"
+	let g:path = expand("%:p")
+	:execute "silent !scp -i ". g:sshkey . " " . g:path . " ivan@freeipa.paizuri.local:/home/ivan/"
 endfunc
 "}}}
 " {{{ pwgen
 function! GenPass()
-        let pass=system('pwgen 16 1')
+        let pass=system('openssl rand -base64 18')
         exe "normal! $a" . "," .  pass . "\<Esc>dd"
 endfunc
 
 nnoremap <leader>p :call GenPass()<cr>
 "}}}
 " регистр % содержит имя текущего файла. Сделать вставку "%p
+" доделать выбор destination для scp через popup menu
